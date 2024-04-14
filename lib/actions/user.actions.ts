@@ -7,15 +7,30 @@ import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 
 // CREATE
+//export async function createUser(user: CreateUserParams) {
+  //try {
+    //await connectToDatabase();
+
+    //const newUser = await User.create(user);
+
+    //return JSON.parse(JSON.stringify(newUser));
+  //} catch (error) {
+    //handleError(error);
+  //}
+//}
+//chat gpt
+// CREATE
 export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase();
-
     const newUser = await User.create(user);
-
     return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
-    handleError(error);
+    // Directly log the error instead of using handleError
+    console.error("Failed to create user:", error);
+    // Return or throw a specific error message
+    // Consider what the consumer of this function would expect in case of an error
+    return { error: "Failed to create user. Please check the server logs for more details." };
   }
 }
 
